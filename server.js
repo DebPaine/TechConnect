@@ -1,6 +1,9 @@
 const express = require('express');
+const db = require('./config/db');
 
 const app = express();
+
+db.connectDB();
 
 app.get('/', (req, res) => res.json('This is the root page'));
 
