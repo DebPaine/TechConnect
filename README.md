@@ -1,2 +1,2 @@
 # developer-hub
-Social media for developers
+Social network for developers
