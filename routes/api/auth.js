@@ -1,7 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../../middleware/auth');
+const Register = require('../../models/Register');
 
-//Access = public
-router.get('/', (req, res) => res.json('Auth route'));
+router.get('/', authMiddleware, async (req, res) => {
+	try {
+		const user = await Register.findById(req.userID).select('-password');
+		res.json(user);
+	} catch (err) {
+		console.log(err.message);
+		res.status(404).json('User not found');
+	}
+});
 
 module.exports = router;
