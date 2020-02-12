@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('config');
 const db = config.get('mongoURI');
-const hello = config.get('test'); //gets JSON from default.json, folder name should also be config along with default.json
+//gets JSON from default.json, folder name should also be config along with default.json
 
 const connectDB = async () => {
 	try {

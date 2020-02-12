@@ -3,6 +3,8 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const Register = require('../../models/Register');
 
 //Access = public
@@ -16,15 +18,16 @@ router.post(
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			res.status(400).json({ errorssss: errors.array() });
+			return res.status(400).json({ errors: errors.array() });
 		}
 		try {
 			const { name, email, password } = req.body;
 
 			// finds documents(users) with the email address
+			// document = row in RDBMS
 			let userEmail = await Register.findOne({ email });
 			if (userEmail) {
-				res.status(400).json('User already exists');
+				return res.status(400).json({ error: 'User already exists' });
 			}
 
 			const avatar = gravatar.url(email, {
@@ -47,7 +50,10 @@ router.post(
 
 			await user.save();
 
-			res.json('User registered');
+			jwt.sign({ userID: user.id }, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+				if (err) throw err;
+				res.json({ token });
+			});
 		} catch (err) {
 			res.status(400).json('Registration error');
 		}

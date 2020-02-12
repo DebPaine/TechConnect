@@ -1,4 +1,4 @@
 {
-	"test": "Helloooooooooooooooooooooooo",
-	"mongoURI": "mongodb+srv://DebPaine:Ukp_272340@developerhub-5bhxp.mongodb.net/test?retryWrites=true&w=majority"
+	"mongoURI": "mongodb+srv://DebPaine:Ukp_272340@developerhub-5bhxp.mongodb.net/test?retryWrites=true&w=majority",
+	"jwtSecret": "secrettokenofmine"
 }
