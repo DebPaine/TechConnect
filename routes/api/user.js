@@ -5,13 +5,12 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const Register = require('../../models/Register');
+const User = require('../../models/User');
 
-//Access = public
 router.post(
 	'/',
 	[
-		check('name', 'Name is required').notEmpty(),
+		check('name', 'Name is required').notEmpty().isString(),
 		check('email', 'Please include a valid email').isEmail(),
 		check('password', 'Please enter a password with 5 or more characters').isLength({ min: 5 })
 	],
@@ -22,10 +21,8 @@ router.post(
 		}
 		try {
 			const { name, email, password } = req.body;
-
-			// finds documents(users) with the email address
-			// document = row in RDBMS
-			let userWithEmail = await Register.findOne({ email });
+			let userWithEmail = await User.findOne({ email });
+			console.log(userWithEmail);
 			if (userWithEmail) {
 				return res.status(400).json({ error: 'User already exists' });
 			}
@@ -36,15 +33,13 @@ router.post(
 				d: 'mm'
 			});
 
-			// creates instance of model(document),creates new user
-			const user = new Register({
+			const user = new User({
 				name,
-				email,
 				password,
+				email,
 				avatar
 			});
 
-			//Encrypt password before storing in database
 			const salt = await bcrypt.genSalt(10);
 			user.password = await bcrypt.hash(password, salt);
 

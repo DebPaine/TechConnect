@@ -1,6 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db');
-const register = require('./routes/api/register');
+const user = require('./routes/api/user');
 const auth = require('./routes/api/auth');
 const posts = require('./routes/api/posts');
 const profile = require('./routes/api/profile');
@@ -13,7 +13,7 @@ app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.json('This is the root page'));
 
-app.use('/register', register);
+app.use('/register', user);
 app.use('/auth', auth);
 app.use('/posts', posts);
 app.use('/profile', profile);

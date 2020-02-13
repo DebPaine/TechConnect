@@ -5,11 +5,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const authMiddleware = require('../../middleware/auth');
-const Register = require('../../models/Register');
+const User = require('../../models/User');
 
+// To see if user exists or not
 router.get('/', authMiddleware, async (req, res) => {
 	try {
-		const user = await Register.findById(req.userID).select('-password');
+		const user = await User.findById(req.userID).select('-password');
 		res.json(user);
 	} catch (err) {
 		console.log(err.message);
@@ -17,6 +18,7 @@ router.get('/', authMiddleware, async (req, res) => {
 	}
 });
 
+// To sign in
 router.post(
 	'/',
 	[
@@ -30,8 +32,7 @@ router.post(
 		}
 		try {
 			const { email, password } = req.body;
-			let user = await Register.findOne({ email });
-			console.log(user);
+			const user = await User.findOne({ email });
 			if (!user) {
 				return res.status(401).json('Invalid credentials');
 			}
