@@ -3,7 +3,7 @@ const config = require('config');
 const db = config.get('mongoURI');
 //gets JSON from default.json, folder name should also be config along with default.json
 
-const connectDB = async () => {
+module.exports = async () => {
 	try {
 		await mongoose.connect(db, {
 			useNewUrlParser: true,
@@ -12,9 +12,7 @@ const connectDB = async () => {
 		});
 		console.log('MongoDB connected!');
 	} catch (err) {
-		console.error('Error');
+		console.error('MongoDB not connected');
 		process.exit(1);
 	}
 };
-
-module.exports = connectDB;

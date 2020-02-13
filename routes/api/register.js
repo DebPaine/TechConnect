@@ -25,8 +25,8 @@ router.post(
 
 			// finds documents(users) with the email address
 			// document = row in RDBMS
-			let userEmail = await Register.findOne({ email });
-			if (userEmail) {
+			let userWithEmail = await Register.findOne({ email });
+			if (userWithEmail) {
 				return res.status(400).json({ error: 'User already exists' });
 			}
 
