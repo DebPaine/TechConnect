@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ProfileSchema = new mongoose.Schema({
-	userID: {
+	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'user'
 	},
@@ -13,7 +13,9 @@ const ProfileSchema = new mongoose.Schema({
 		requried: true
 	},
 	skills: {
-		type: [ String ],
+		type: [
+			String
+		],
 		required: true
 	},
 	bio: String,
@@ -38,8 +40,7 @@ const ProfileSchema = new mongoose.Schema({
 				default: false
 			},
 			to: {
-				type: Date,
-				required: true
+				type: Date
 			},
 			description: String
 		}
@@ -67,8 +68,7 @@ const ProfileSchema = new mongoose.Schema({
 				default: false
 			},
 			to: {
-				type: Date,
-				required: true
+				type: Date
 			},
 			description: String
 		}

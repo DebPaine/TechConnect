@@ -22,7 +22,6 @@ router.post(
 		try {
 			const { name, email, password } = req.body;
 			let userWithEmail = await User.findOne({ email });
-			console.log(userWithEmail);
 			if (userWithEmail) {
 				return res.status(400).json({ error: 'User already exists' });
 			}
@@ -35,8 +34,8 @@ router.post(
 
 			const user = new User({
 				name,
-				password,
 				email,
+				password,
 				avatar
 			});
 
@@ -45,7 +44,8 @@ router.post(
 
 			await user.save();
 
-			jwt.sign({ userID: user.id }, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+			const payload = { userID: user.id };
+			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
 				if (err) throw err;
 				res.json({ token });
 			});
