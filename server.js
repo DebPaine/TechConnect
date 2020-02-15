@@ -1,9 +1,9 @@
 const express = require('express');
 const connectDB = require('./config/db');
-const user = require('./routes/api/user');
-const auth = require('./routes/api/auth');
-const posts = require('./routes/api/posts');
-const profile = require('./routes/api/profile');
+const user = require('./routes/user');
+const auth = require('./routes/auth');
+const posts = require('./routes/posts');
+const profile = require('./routes/profile');
 
 const app = express();
 

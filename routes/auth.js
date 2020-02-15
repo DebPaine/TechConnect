@@ -4,8 +4,8 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-const authMiddleware = require('../../middleware/auth');
-const User = require('../../models/User');
+const authMiddleware = require('../middleware/auth');
+const User = require('../models/User');
 
 // To see if user exists or not
 router.get('/', authMiddleware, async (req, res) => {
