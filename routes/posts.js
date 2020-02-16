@@ -6,7 +6,7 @@ const Post = require('../models/Post');
 const Profile = require('../models/Profile');
 const authMiddleware = require('../middleware/auth');
 
-// Post new post
+// Add new post
 router.post(
 	'/',
 	[
@@ -93,7 +93,7 @@ router.delete('/:postid', authMiddleware, async (req, res) => {
 });
 
 // Update like/unlike
-router.put('/like/:postid', authMiddleware, async (req, res) => {
+router.put('/:postid/like', authMiddleware, async (req, res) => {
 	try {
 		// Storing the particular post in variable
 		const post = await Post.findById(req.params.postid);
@@ -112,6 +112,68 @@ router.put('/like/:postid', authMiddleware, async (req, res) => {
 		res.json(post);
 	} catch (err) {
 		console.error(err.message);
+		res.status(500).json('Server error');
+	}
+});
+
+// Add comment
+router.post(
+	'/:postid/comment',
+	[
+		authMiddleware,
+		[
+			check('text', "Text field can't be empty").notEmpty()
+		]
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json(errors);
+		}
+		try {
+			const user = await User.findById(req.userID).select('-password');
+			const post = await Post.findById(req.params.postid);
+
+			const newComment = {
+				user: req.userID,
+				name: user.name,
+				text: req.body.text,
+				avatar: user.avatar
+			};
+
+			post.comments.unshift(newComment);
+
+			await post.save();
+			res.json(post);
+		} catch (err) {
+			console.error(err.message);
+			res.status(500).json('Server error');
+		}
+	}
+);
+
+// Delete comment
+router.delete('/:postid/comment/:commentid', authMiddleware, async (req, res) => {
+	try {
+		const post = await Post.findById(req.params.postid);
+		// Get comment
+		const comment = post.comments.find((comment) => comment.id === req.params.commentid);
+
+		if (!comment) {
+			return res.status(404).json('Comment does not exist');
+		}
+
+		if (comment.user.toString() !== req.userID) {
+			return res.status(401).json('User not authorized');
+		}
+
+		const deleteComment = post.comments.map((comment) => comment.id.toString()).indexOf(req.params.commentid);
+		post.comments.splice(deleteComment, 1);
+
+		await post.save();
+		res.json(post);
+	} catch (err) {
+		console.log(err.message);
 		res.status(500).json('Server error');
 	}
 });
