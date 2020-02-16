@@ -54,7 +54,7 @@ router.get('/user/:user_id', async (req, res) => {
 		res.json(profile);
 	} catch (err) {
 		console.error(err.message);
-		if (err.kind == 'ObjectId') {
+		if (err.kind === 'ObjectId') {
 			return res.status(400).json('No profile with the given user ID');
 		}
 		res.status(500).json('Server error');
@@ -187,6 +187,9 @@ router.delete('/experience/:exp_id', authMiddleware, async (req, res) => {
 		res.status(400).json('Experience is not present');
 	} catch (err) {
 		console.error(err.message);
+		if (err.kind === 'ObjectId') {
+			return res.status(400).json('Experience is not present');
+		}
 		res.status(500).json('Server error');
 	}
 });
@@ -249,6 +252,9 @@ router.delete('/education/:edu_id', authMiddleware, async (req, res) => {
 		res.status(400).json('Education is not present');
 	} catch (err) {
 		console.error(err.message);
+		if (err.kind === 'ObjectId') {
+			return res.status(400).json('Education is not present');
+		}
 		res.status(500).json('Server error');
 	}
 });
