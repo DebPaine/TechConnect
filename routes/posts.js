@@ -174,6 +174,9 @@ router.delete('/:postid/comment/:commentid', authMiddleware, async (req, res) =>
 		res.json(post);
 	} catch (err) {
 		console.log(err.message);
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json('Comment does not exist');
+		}
 		res.status(500).json('Server error');
 	}
 });
