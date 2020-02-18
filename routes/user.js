@@ -32,14 +32,14 @@ router.post(
 				r: 'pg',
 				d: 'mm'
 			});
-
+			// Making new document from User model
 			const user = new User({
 				name,
 				email,
 				password,
 				avatar
 			});
-
+			// Updating document using hashed password
 			const salt = await bcrypt.genSalt(10);
 			user.password = await bcrypt.hash(password, salt);
 
