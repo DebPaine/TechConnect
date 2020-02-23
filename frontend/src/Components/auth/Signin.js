@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 export const Signin = () => {
 	// formData = this.state, setFromData() = this.setState()
@@ -14,9 +13,8 @@ export const Signin = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
-	const onSubmit = async (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault();
-		console.log('Success');
 	};
 	return (
 		<Fragment>
@@ -26,7 +24,14 @@ export const Signin = () => {
 			</p>
 			<form className='form' onSubmit={onSubmit}>
 				<div className='form-group'>
-					<input type='email' placeholder='Email Address' name='email' value={email} onChange={onChange} />
+					<input
+						type='email'
+						placeholder='Email Address'
+						name='email'
+						value={email}
+						onChange={onChange}
+						required
+					/>
 				</div>
 				<div className='form-group'>
 					<input
@@ -36,6 +41,7 @@ export const Signin = () => {
 						minLength='5'
 						value={password}
 						onChange={onChange}
+						required
 					/>
 				</div>
 				<input type='submit' className='btn btn-primary' value='Sign in' />

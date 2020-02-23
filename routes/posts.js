@@ -7,36 +7,27 @@ const Profile = require('../models/Profile');
 const authMiddleware = require('../middleware/auth');
 
 // Add new post
-router.post(
-	'/',
-	[
-		authMiddleware,
-		[
-			check('text', "Text field can't be empty").notEmpty()
-		]
-	],
-	async (req, res) => {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(400).json(errors);
-		}
-		try {
-			const user = await User.findById(req.userID).select('-password');
-			const newPost = new Post({
-				user: req.userID,
-				name: user.name,
-				text: req.body.text,
-				avatar: user.avatar
-			});
-
-			await newPost.save();
-			res.json(newPost);
-		} catch (err) {
-			console.error(err.message);
-			res.status(500).json('Server error');
-		}
+router.post('/', [ authMiddleware, [ check('text', "Text field can't be empty").notEmpty() ] ], async (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json(errors);
 	}
-);
+	try {
+		const user = await User.findById(req.userID).select('-password');
+		const newPost = new Post({
+			user: req.userID,
+			name: user.name,
+			text: req.body.text,
+			avatar: user.avatar
+		});
+
+		await newPost.save();
+		res.json(newPost);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json('Server error');
+	}
+});
 
 // Get all posts
 router.get('/', authMiddleware, async (req, res) => {
@@ -119,12 +110,7 @@ router.put('/:postid/like', authMiddleware, async (req, res) => {
 // Add comment
 router.post(
 	'/:postid/comment',
-	[
-		authMiddleware,
-		[
-			check('text', "Text field can't be empty").notEmpty()
-		]
-	],
+	[ authMiddleware, [ check('text', "Text field can't be empty").notEmpty() ] ],
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {

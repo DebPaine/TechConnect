@@ -1,8 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+import PropTypes from 'prop-types';
 
-export const Register = () => {
+export const Register = ({ setAlert, register }) => {
 	// formData = this.state, setFromData() = this.setState()
 	const [ formData, setFormData ] = useState({
 		name: '',
@@ -18,12 +21,12 @@ export const Register = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
-	const onSubmit = async (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault();
 		if (password !== password2) {
-			alert("Password don't match!!");
+			setAlert('Password do not match', 'danger', 3000);
 		} else {
-			console.log('Success');
+			register(name, email, password);
 		}
 	};
 	return (
@@ -34,7 +37,7 @@ export const Register = () => {
 			</p>
 			<form className='form' onSubmit={onSubmit}>
 				<div className='form-group'>
-					<input type='text' placeholder='Name' name='name' value={name} onChange={onChange} required />
+					<input type='text' placeholder='Name' name='name' value={name} onChange={onChange} />
 				</div>
 				<div className='form-group'>
 					<input type='email' placeholder='Email Address' name='email' value={email} onChange={onChange} />
@@ -69,4 +72,11 @@ export const Register = () => {
 	);
 };
 
-export default Register;
+Register.propTypes = {
+	setAlert: PropTypes.func.isRequired,
+	register: PropTypes.func.isRequired
+};
+
+export default connect(null, { setAlert, register })(Register);
+// mapStateToProps
+// mapDispatchToProps
