@@ -29,6 +29,7 @@ export const Register = ({ setAlert, register }) => {
 			register(name, email, password);
 		}
 	};
+
 	return (
 		<Fragment>
 			<h1 className='large text-primary'>Register</h1>
