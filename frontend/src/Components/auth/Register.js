@@ -1,12 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-export const Register = ({ setAlert, register }) => {
-	// formData = this.state, setFromData() = this.setState()
+export const Register = ({ setAlert, register, isAuthenticated }) => {
 	const [ formData, setFormData ] = useState({
 		name: '',
 		email: '',
@@ -16,8 +15,6 @@ export const Register = ({ setAlert, register }) => {
 	const { name, email, password, password2 } = formData;
 
 	const onChange = (e) => {
-		// [e.target.name]: e.target.value overwrites old value in ...formdata
-		// useState() replaces old state instead of merging like this.setState()
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
@@ -29,6 +26,10 @@ export const Register = ({ setAlert, register }) => {
 			register(name, email, password);
 		}
 	};
+
+	if (isAuthenticated) {
+		return <Redirect to='/dashboard' />;
+	}
 
 	return (
 		<Fragment>
@@ -73,11 +74,14 @@ export const Register = ({ setAlert, register }) => {
 	);
 };
 
+const mapStateToProps = (state) => ({
+	isAuthenticated: state.auth.isAuthenticated
+});
+
 Register.propTypes = {
 	setAlert: PropTypes.func.isRequired,
-	register: PropTypes.func.isRequired
+	register: PropTypes.func.isRequired,
+	isAuthenticated: PropTypes.bool.isRequired
 };
 
-export default connect(null, { setAlert, register })(Register);
-// mapStateToProps
-// mapDispatchToProps
+export default connect(mapStateToProps, { setAlert, register })(Register);

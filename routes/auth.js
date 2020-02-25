@@ -28,26 +28,26 @@ router.post(
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() });
+			return res.status(400).json({ error: errors.array() });
 		}
 		try {
 			const { email, password } = req.body;
 			const user = await User.findOne({ email });
 			if (!user) {
-				return res.status(401).json('Invalid credentials');
+				return res.status(401).json({ error: 'Invalid credentials' });
 			}
 
 			const result = await bcrypt.compare(password, user.password);
 			if (!result) {
-				return res.status(401).json('Invalid credentials');
+				return res.status(401).json({ error: 'Invalid credentials' });
 			}
 
-			jwt.sign({ userID: user.id }, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+			jwt.sign({ userID: user.id }, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
 				if (err) throw err;
 				res.json({ token });
 			});
 		} catch (err) {
-			res.status(400).json('Registration error');
+			res.status(400).json({ error: 'Signin error' });
 		}
 	}
 );

@@ -46,12 +46,12 @@ router.post(
 			await user.save();
 
 			const payload = { userID: user.id };
-			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
 				if (err) throw err;
 				res.json({ token });
 			});
 		} catch (err) {
-			res.status(400).json('Registration error');
+			res.status(400).json({ error: 'Registration error' });
 		}
 	}
 );

@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signin } from '../../actions/auth';
+import PropTypes from 'prop-types';
 
-export const Signin = () => {
-	// formData = this.state, setFromData() = this.setState()
+export const Signin = ({ signin, isAuthenticated }) => {
 	const [ formData, setFormData ] = useState({
 		email: '',
 		password: ''
@@ -15,7 +17,13 @@ export const Signin = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		signin(email, password);
 	};
+
+	if (isAuthenticated) {
+		return <Redirect to='/dashboard' />;
+	}
+
 	return (
 		<Fragment>
 			<h1 className='large text-primary'>Sign In</h1>
@@ -24,14 +32,7 @@ export const Signin = () => {
 			</p>
 			<form className='form' onSubmit={onSubmit}>
 				<div className='form-group'>
-					<input
-						type='email'
-						placeholder='Email Address'
-						name='email'
-						value={email}
-						onChange={onChange}
-						required
-					/>
+					<input type='email' placeholder='Email Address' name='email' value={email} onChange={onChange} />
 				</div>
 				<div className='form-group'>
 					<input
@@ -41,7 +42,6 @@ export const Signin = () => {
 						minLength='5'
 						value={password}
 						onChange={onChange}
-						required
 					/>
 				</div>
 				<input type='submit' className='btn btn-primary' value='Sign in' />
@@ -53,4 +53,13 @@ export const Signin = () => {
 	);
 };
 
-export default Signin;
+const mapStateToProps = (state) => ({
+	isAuthenticated: state.auth.isAuthenticated
+});
+
+Signin.propTypes = {
+	signin: PropTypes.func.isRequired,
+	isAuthenticated: PropTypes.bool.isRequired
+};
+
+export default connect(mapStateToProps, { signin })(Signin);
