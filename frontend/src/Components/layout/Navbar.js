@@ -8,24 +8,14 @@ const Navbar = ({ auth: { isAuthenticated, gotResponse }, signout }) => {
 	const authLinks = (
 		<ul>
 			<li>
-				<Link to='/' onClick={signout}>
-					<i className='fas fa-sign-out-alt' />
-					<span className='hide-sm'> Sign out</span>
+				<Link to='/dashboard'>
+					<i className='fas fa-user' /> Dashboard
 				</Link>
 			</li>
-		</ul>
-	);
-
-	const guestLinks = (
-		<ul>
 			<li>
-				<Link to='/'>Developers</Link>
-			</li>
-			<li>
-				<Link to='/register'>Register</Link>
-			</li>
-			<li>
-				<Link to='/signin'>Sign in</Link>
+				<Link to='/' onClick={signout}>
+					<i className='fas fa-sign-out-alt' /> Sign out
+				</Link>
 			</li>
 		</ul>
 	);
@@ -37,7 +27,7 @@ const Navbar = ({ auth: { isAuthenticated, gotResponse }, signout }) => {
 					<i className='fas fa-project-diagram' /> Developer Hub
 				</Link>
 			</h1>
-			{gotResponse && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
+			{gotResponse && <Fragment>{isAuthenticated ? authLinks : null}</Fragment>}
 		</nav>
 	);
 };

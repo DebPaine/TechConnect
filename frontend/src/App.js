@@ -6,8 +6,10 @@ import Navbar from './Components/layout/Navbar';
 import Register from './Components/auth/Register';
 import Signin from './Components/auth/Signin';
 import Alert from './Components/layout/Alert';
-import store from './store';
+import Dashboard from './Components/dashboard/Dashboard';
 import { loadUser } from './actions/auth';
+import PrivateRoute from './Components/routing/PrivateRoute';
+import store from './store';
 import './App.css';
 
 const App = () => {
@@ -28,6 +30,7 @@ const App = () => {
 						<Switch>
 							<Route exact path='/register' component={Register} />
 							<Route exact path='/signin' component={Signin} />
+							<PrivateRoute exact path='/dashboard' component={Dashboard} />
 						</Switch>
 					</section>
 				</Fragment>
