@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createProfile } from '../../actions/profile';
+import { getCurrentProfile, createProfile } from '../../actions/profile';
 import PropTypes from 'prop-types';
 
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({ profile: { profile, gotResponse }, createProfile, getCurrentProfile, history }) => {
 	const [ formData, setFormData ] = useState({
 		company: '',
 		website: '',
@@ -21,6 +21,23 @@ const CreateProfile = ({ createProfile, history }) => {
 	});
 
 	const [ displaySocialInputs, toggleSocialInputs ] = useState(false);
+
+	useEffect(
+		() => {
+			if (!profile) getCurrentProfile();
+			if (gotResponse) {
+				const profileData = { ...formData };
+				for (const key in profile) {
+					if (key in profileData) profileData[key] = profile[key];
+				}
+				for (const key in profile.social) {
+					if (key in profileData) profileData[key] = profile.social[key];
+				}
+				setFormData(profileData);
+			}
+		},
+		[ gotResponse, getCurrentProfile, profile, formData ]
+	);
 
 	const {
 		company,
@@ -41,7 +58,7 @@ const CreateProfile = ({ createProfile, history }) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		createProfile(formData, history);
+		createProfile(formData, history, true);
 	};
 
 	return (
@@ -177,8 +194,14 @@ const CreateProfile = ({ createProfile, history }) => {
 	);
 };
 
-CreateProfile.propTypes = {
-	createProfile: PropTypes.func.isRequired
+const mapStateToProps = (state) => ({
+	profile: state.profile
+});
+
+EditProfile.propTypes = {
+	createProfile: PropTypes.func.isRequired,
+	getCurrentProfile: PropTypes.func.isRequired,
+	profile: PropTypes.object.isRequired
 };
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));

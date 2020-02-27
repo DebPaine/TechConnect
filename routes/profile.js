@@ -110,7 +110,7 @@ router.post(
 				return res.json(profile);
 			}
 
-			// Create profile if profile not found
+			// Create new profile if profile not found
 			profile = new Profile(profileFields);
 
 			await profile.save();
