@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCurrentProfile } from '../../actions/profile';
-import Spinner from '../layout/Spinner';
 
 const Dashboard = ({ auth: { user }, profile: { profile, gotResponse }, getCurrentProfile }) => {
 	useEffect(
@@ -13,9 +12,7 @@ const Dashboard = ({ auth: { user }, profile: { profile, gotResponse }, getCurre
 		[ getCurrentProfile ]
 	);
 
-	return !gotResponse && !profile ? (
-		<Spinner />
-	) : (
+	return (
 		<Fragment>
 			<h1 className='large text-primary'>Dashboard</h1>
 			<p className='lead'>
@@ -25,7 +22,7 @@ const Dashboard = ({ auth: { user }, profile: { profile, gotResponse }, getCurre
 				<Fragment>has profile</Fragment>
 			) : (
 				<Fragment>
-					<p>You have not yet created a profile, create one by clicking the button below</p>
+					<p>You have not yet created a profile</p>
 					<Link to='/create-profile' className='btn btn-primary my-1'>
 						Create Profile
 					</Link>
