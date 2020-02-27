@@ -59,7 +59,7 @@ const mapStateToProps = (state) => ({
 
 Signin.propTypes = {
 	signin: PropTypes.func.isRequired,
-	isAuthenticated: PropTypes.bool.isRequired
+	isAuthenticated: PropTypes.bool
 };
 
 export default connect(mapStateToProps, { signin })(Signin);

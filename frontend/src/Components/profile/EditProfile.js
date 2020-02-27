@@ -36,7 +36,8 @@ const EditProfile = ({ profile: { profile, gotResponse }, createProfile, getCurr
 				setFormData(profileData);
 			}
 		},
-		[ gotResponse, getCurrentProfile, profile, formData ]
+		// eslint-disable-next-line
+		[ gotResponse, getCurrentProfile, profile ]
 	);
 
 	const {
@@ -63,7 +64,7 @@ const EditProfile = ({ profile: { profile, gotResponse }, createProfile, getCurr
 
 	return (
 		<Fragment>
-			<h1 className='large text-primary'>Create Your Profile</h1>
+			<h1 className='large text-primary'>Edit your profile</h1>
 			<p className='lead'>
 				<i className='fas fa-user' /> Let's get some information to make your profile stand out
 			</p>

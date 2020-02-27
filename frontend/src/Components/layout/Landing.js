@@ -34,7 +34,7 @@ const mapStateToProps = (state) => ({
 });
 
 Landing.propTypes = {
-	isAuthenticated: PropTypes.bool.isRequired
+	isAuthenticated: PropTypes.bool
 };
 
 export default connect(mapStateToProps, null)(Landing);
