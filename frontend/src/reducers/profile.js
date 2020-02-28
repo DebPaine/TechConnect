@@ -1,4 +1,11 @@
-import { GET_PROFILE, UPDATE_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from '../actions/types';
+import {
+	GET_PROFILE,
+	GET_PROFILES,
+	GET_GITHUB_REPOS,
+	UPDATE_PROFILE,
+	PROFILE_ERROR,
+	CLEAR_PROFILE
+} from '../actions/types';
 
 const initialState = {
 	gotResponse: false,
@@ -19,6 +26,10 @@ export default function (state = initialState, action) {
 				gotResponse: true,
 				error: {}
 			};
+		case GET_PROFILES:
+			return { ...state, profiles: payload, gotResponse: true };
+		case GET_GITHUB_REPOS:
+			return { ...state, repos: payload, gotResponse: true };
 		case PROFILE_ERROR:
 			return {
 				...state,

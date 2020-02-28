@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, CLEAR_PROFILE, ACCOUNT_DELETED } from './types';
+import {
+	GET_PROFILE,
+	GET_PROFILES,
+	GET_GITHUB_REPOS,
+	PROFILE_ERROR,
+	UPDATE_PROFILE,
+	CLEAR_PROFILE,
+	ACCOUNT_DELETED
+} from './types';
 
 // Get current user's profile
 export const getCurrentProfile = () => async (dispatch) => {
@@ -8,6 +16,55 @@ export const getCurrentProfile = () => async (dispatch) => {
 		const res = await axios.get('/profile/me');
 		dispatch({
 			type: GET_PROFILE,
+			payload: res.data
+		});
+	} catch (err) {
+		dispatch({
+			type: PROFILE_ERROR,
+			payload: { msg: err.response.data, status: err.response.status }
+		});
+	}
+};
+
+// Get all profiles
+export const getAllProfiles = () => async (dispatch) => {
+	dispatch({ type: CLEAR_PROFILE });
+	try {
+		const res = await axios.get('/profile');
+		dispatch({
+			type: GET_PROFILES,
+			payload: res.data
+		});
+	} catch (err) {
+		dispatch({
+			type: PROFILE_ERROR,
+			payload: { msg: err.response.data, status: err.response.status }
+		});
+	}
+};
+
+// Get profile by userID
+export const getProfileById = (userID) => async (dispatch) => {
+	try {
+		const res = await axios.get(`/profile/user/${userID}`);
+		dispatch({
+			type: GET_PROFILE,
+			payload: res.data
+		});
+	} catch (err) {
+		dispatch({
+			type: PROFILE_ERROR,
+			payload: { msg: err.response.data, status: err.response.status }
+		});
+	}
+};
+
+// Get Github repos
+export const getGithubRepos = (username) => async (dispatch) => {
+	try {
+		const res = await axios.get(`/profile/github/${username}`);
+		dispatch({
+			type: GET_GITHUB_REPOS,
 			payload: res.data
 		});
 	} catch (err) {
@@ -78,6 +135,10 @@ export const deleteExperience = (exp_id) => async (dispatch) => {
 		});
 		dispatch(setAlert('Experience deleted', 'success', 3000));
 	} catch (err) {
+		dispatch({
+			type: PROFILE_ERROR,
+			payload: { msg: err.response.data, status: err.response.status }
+		});
 		dispatch(setAlert(err.response.data, 'danger', 3000));
 	}
 };
@@ -116,6 +177,10 @@ export const deleteEducation = (edu_id) => async (dispatch) => {
 		});
 		dispatch(setAlert('Education deleted', 'success', 3000));
 	} catch (err) {
+		dispatch({
+			type: PROFILE_ERROR,
+			payload: { msg: err.response.data, status: err.response.status }
+		});
 		dispatch(setAlert(err.response.data, 'danger'));
 	}
 };

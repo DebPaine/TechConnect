@@ -5,6 +5,7 @@ const request = require('request');
 const config = require('config');
 const Profile = require('../models/Profile');
 const User = require('../models/User');
+const Post = require('../models/Post');
 const authMiddleware = require('../middleware/auth');
 
 // Access my profile
@@ -249,9 +250,12 @@ router.delete('/education/:edu_id', authMiddleware, async (req, res) => {
 	}
 });
 
-// Delete profile and user
+// Delete posts, profile and user
 router.delete('/', authMiddleware, async (req, res) => {
 	try {
+		// Delete user's posts
+		await Post.deleteMany({ user: req.userID });
+
 		// Delete profile
 		await Profile.findOneAndDelete({ user: req.userID });
 
