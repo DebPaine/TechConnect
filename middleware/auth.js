@@ -11,6 +11,6 @@ module.exports = (req, res, next) => {
 		req.userID = decoded.userID;
 		next();
 	} catch (err) {
-		res.status(401).json('Token is not valid');
+		res.status(401).json('Please sign in again (session expired)');
 	}
 };

@@ -10,10 +10,7 @@ const authMiddleware = require('../middleware/auth');
 // Access my profile
 router.get('/me', authMiddleware, async (req, res) => {
 	try {
-		const profile = await Profile.findOne({ user: req.userID }).populate('user', [
-			'name',
-			'avatar'
-		]);
+		const profile = await Profile.findOne({ user: req.userID }).populate('user', [ 'name', 'avatar' ]);
 		if (!profile) {
 			return res.status(400).json('No profile of the given user exits');
 		}
@@ -27,10 +24,7 @@ router.get('/me', authMiddleware, async (req, res) => {
 // Get all profiles
 router.get('/', async (req, res) => {
 	try {
-		const profiles = await Profile.find().populate('user', [
-			'name',
-			'avatar'
-		]);
+		const profiles = await Profile.find().populate('user', [ 'name', 'avatar' ]);
 		if (!profiles) {
 			return res.status(400).json('Profiles not available');
 		}
@@ -44,10 +38,7 @@ router.get('/', async (req, res) => {
 // Get profile by userID (viewing other people's profile)
 router.get('/user/:user_id', async (req, res) => {
 	try {
-		const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', [
-			'name',
-			'avatar'
-		]);
+		const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', [ 'name', 'avatar' ]);
 		if (!profile) {
 			return res.status(400).json('No profile with the given user ID');
 		}
@@ -66,10 +57,7 @@ router.post(
 	'/',
 	[
 		authMiddleware,
-		[
-			check('status', "Status can't be empty").notEmpty(),
-			check('skills', "Skills can't be empty").notEmpty()
-		]
+		[ check('status', "Status can't be empty").notEmpty(), check('skills', "Skills can't be empty").notEmpty() ]
 	],
 	async (req, res) => {
 		const errors = validationResult(req);
@@ -102,7 +90,9 @@ router.post(
 		if (status) profileFields.status = status;
 		if (githubusername) profileFields.githubusername = githubusername;
 		if (skills) {
-			profileFields.skills = skills.split(',').map((skill) => skill.trim());
+			profileFields.skills = Array.isArray(skills)
+				? skills
+				: skills.split(',').map((skill) => ' ' + skill.trim());
 		}
 		profileFields.social = {};
 		if (youtube) profileFields.social.youtube = youtube;

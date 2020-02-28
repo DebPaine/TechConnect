@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
-import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addEducation } from '../../actions/profile';
 
@@ -78,7 +78,7 @@ const AddEducation = ({ addEducation, history }) => {
 						name='description'
 						cols='30'
 						rows='5'
-						placeholder='Programming knowledge'
+						placeholder='Degree description'
 						value={description}
 						onChange={onChange}
 					/>
