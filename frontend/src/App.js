@@ -9,6 +9,8 @@ import Alert from './Components/layout/Alert';
 import Dashboard from './Components/dashboard/Dashboard';
 import CreateProfile from './Components/profile/CreateProfile';
 import EditProfile from './Components/profile/EditProfile';
+import AddExperience from './Components/profile/AddExperience';
+import AddEducation from './Components/profile/AddEducation';
 import PrivateRoute from './Components/routing/PrivateRoute';
 import { loadUser } from './actions/auth';
 import store from './store';
@@ -35,6 +37,8 @@ const App = () => {
 							<PrivateRoute exact path='/dashboard' component={Dashboard} />
 							<PrivateRoute exact path='/create-profile' component={CreateProfile} />
 							<PrivateRoute exact path='/edit-profile' component={EditProfile} />
+							<PrivateRoute exact path='/add-experience' component={AddExperience} />
+							<PrivateRoute exact path='/add-education' component={AddEducation} />
 						</Switch>
 					</section>
 				</Fragment>

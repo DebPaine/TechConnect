@@ -125,7 +125,7 @@ const EditProfile = ({ profile: { profile, gotResponse }, createProfile, getCurr
 					>
 						Add Social Network Links
 					</button>
-					<span>Optional</span>
+					<span>(Optional)</span>
 				</div>
 
 				{displaySocialInputs && (

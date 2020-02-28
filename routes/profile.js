@@ -259,7 +259,7 @@ router.delete('/education/:edu_id', authMiddleware, async (req, res) => {
 	}
 });
 
-// Delete profile, user and posts
+// Delete profile and user
 router.delete('/', authMiddleware, async (req, res) => {
 	try {
 		// Delete profile
