@@ -13,9 +13,7 @@ const ProfileSchema = new mongoose.Schema({
 		requried: true
 	},
 	skills: {
-		type: [
-			String
-		],
+		type: [ String ],
 		required: true
 	},
 	bio: String,
@@ -80,7 +78,7 @@ const ProfileSchema = new mongoose.Schema({
 		linkedin: String,
 		instagram: String
 	},
-	Date: {
+	date: {
 		type: Date,
 		default: Date.now
 	}

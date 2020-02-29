@@ -8,7 +8,7 @@ import { deleteAccount } from '../../actions/profile';
 import Experience from './Experience';
 import Education from './Education';
 
-const Dashboard = ({ auth: { user }, profile: { profile, gotResponse }, deleteAccount, getCurrentProfile }) => {
+const Dashboard = ({ auth: { user }, profile: { profile }, deleteAccount, getCurrentProfile }) => {
 	useEffect(
 		() => {
 			getCurrentProfile();

@@ -23,7 +23,7 @@ router.get('/me', authMiddleware, async (req, res) => {
 });
 
 // Get all profiles
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
 	try {
 		const profiles = await Profile.find().populate('user', [ 'name', 'avatar' ]);
 		if (!profiles) {

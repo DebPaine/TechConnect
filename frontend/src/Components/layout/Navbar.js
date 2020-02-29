@@ -8,6 +8,11 @@ const Navbar = ({ auth: { isAuthenticated, gotResponse }, signout }) => {
 	const authLinks = (
 		<ul>
 			<li>
+				<Link to='/profiles'>
+					<i className='fas fa-users' /> Developers
+				</Link>
+			</li>
+			<li>
 				<Link to='/dashboard'>
 					<i className='fas fa-user' /> Dashboard
 				</Link>
@@ -20,6 +25,16 @@ const Navbar = ({ auth: { isAuthenticated, gotResponse }, signout }) => {
 		</ul>
 	);
 
+	const guestLinks = (
+		<ul>
+			<li>
+				<Link to='/profiles'>
+					<i className='fas fa-users' /> Developers
+				</Link>
+			</li>
+		</ul>
+	);
+
 	return (
 		<nav className='navbar bg-dark'>
 			<h1>
@@ -27,7 +42,7 @@ const Navbar = ({ auth: { isAuthenticated, gotResponse }, signout }) => {
 					<i className='fas fa-project-diagram' /> Developer Hub
 				</Link>
 			</h1>
-			{gotResponse && <Fragment>{isAuthenticated ? authLinks : null}</Fragment>}
+			{gotResponse && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
 		</nav>
 	);
 };
