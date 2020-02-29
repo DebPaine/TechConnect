@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProfileById } from '../../actions/profile';
+import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
 
 const Profile = ({
 	profile: { profile },
@@ -33,6 +35,10 @@ const Profile = ({
 							Edit my profile
 						</Link>
 					)}
+					<div className='profile-grid my-1'>
+						<ProfileTop profile={profile} />
+						<ProfileAbout profile={profile} />
+					</div>
 				</Fragment>
 			)}
 		</Fragment>
