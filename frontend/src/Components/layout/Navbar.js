@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signout } from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated, gotResponse }, signout }) => {
+const Navbar = ({ auth: { isAuthenticated }, signout }) => {
 	const authLinks = (
 		<ul>
 			<li>
@@ -42,7 +42,7 @@ const Navbar = ({ auth: { isAuthenticated, gotResponse }, signout }) => {
 					<i className='fas fa-project-diagram' /> Developer Hub
 				</Link>
 			</h1>
-			{gotResponse && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
+			<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
 		</nav>
 	);
 };

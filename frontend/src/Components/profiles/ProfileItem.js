@@ -1,13 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getProfileById } from '../../actions/profile';
 
-const ProfileItem = ({
-	profile: { user: { _id, name, avatar }, status, company, location, skills },
-	getProfileById
-}) => {
+const ProfileItem = ({ profile: { user: { _id, name, avatar }, status, company, location, skills } }) => {
 	return (
 		<div className='profile bg-light'>
 			<img className='round-img' src={avatar} alt='' />
@@ -34,8 +29,7 @@ const ProfileItem = ({
 };
 
 ProfileItem.propTypes = {
-	profile: PropTypes.object.isRequired,
-	getProfileById: PropTypes.func.isRequired
+	profile: PropTypes.object.isRequired
 };
 
-export default connect(null, { getProfileById })(ProfileItem);
+export default ProfileItem;
