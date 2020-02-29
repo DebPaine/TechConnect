@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const ProfileAbout = ({ profile: { user: { name }, bio, skills } }) => {
+const ProfileBio = ({ profile: { user: { name }, bio, skills } }) => {
 	return (
 		<div className='profile-about bg-light p-2'>
 			{bio && (
@@ -24,8 +24,8 @@ const ProfileAbout = ({ profile: { user: { name }, bio, skills } }) => {
 	);
 };
 
-ProfileAbout.propTypes = {
+ProfileBio.propTypes = {
 	profile: PropTypes.object.isRequired
 };
 
-export default ProfileAbout;
+export default ProfileBio;

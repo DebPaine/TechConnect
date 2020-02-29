@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProfileById } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
-import ProfileAbout from './ProfileAbout';
+import ProfileBio from './ProfileBio';
+import ProfileExp from './ProfileExp';
+import ProfileEdu from './ProfileEdu';
 
 const Profile = ({
 	profile: { profile },
@@ -37,7 +39,18 @@ const Profile = ({
 					)}
 					<div className='profile-grid my-1'>
 						<ProfileTop profile={profile} />
-						<ProfileAbout profile={profile} />
+						<ProfileBio profile={profile} />
+					</div>
+					<div className='profile-exp bg-white p-2'>
+						<h2 className='text-primary'>Experience</h2>
+						{profile.experience.length > 0 ? (
+							<ProfileExp profile={profile} />
+						) : (
+							<h4>No experience added by user</h4>
+						)}
+					</div>
+					<div className='profile-edu bg-white p-2'>
+						<ProfileEdu profile={profile} />
 					</div>
 				</Fragment>
 			)}
