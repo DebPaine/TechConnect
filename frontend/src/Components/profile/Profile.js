@@ -46,11 +46,16 @@ const Profile = ({
 						{profile.experience.length > 0 ? (
 							<ProfileExp profile={profile} />
 						) : (
-							<h4>No experience added by user</h4>
+							<h4>No experience details added by user</h4>
 						)}
 					</div>
 					<div className='profile-edu bg-white p-2'>
-						<ProfileEdu profile={profile} />
+						<h2 className='text-primary'>Education</h2>
+						{profile.education.length > 0 ? (
+							<ProfileEdu profile={profile} />
+						) : (
+							<h4>No education details added by user</h4>
+						)}
 					</div>
 				</Fragment>
 			)}

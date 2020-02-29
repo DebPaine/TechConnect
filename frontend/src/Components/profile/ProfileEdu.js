@@ -1,27 +1,31 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 
 const ProfileEdu = ({ profile: { education } }) => {
 	return (
 		<Fragment>
-			{/* <h2 className='text-primary'>Education</h2>
-            <
-            {education} */}
-			<Fragment>
-				<h3>University Of Washington</h3>
-				<p>Sep 1993 - June 1999</p>
-				<p>
-					<strong>Degree: </strong>Masters
-				</p>
-				<p>
-					<strong>Field Of Study: </strong>Computer Science
-				</p>
-				<p>
-					<strong>Description: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-					placeat, dolorum ullam ipsam, sapiente suscipit dicta eius velit amet aspernatur asperiores modi
-					quidem expedita fugit.
-				</p>
-			</Fragment>
+			{education.map((edu) => (
+				<Fragment key={edu._id}>
+					<h3>{edu.school}</h3>
+					<p>
+						<Moment format='DD/MM/YYYY'>{edu.from}</Moment> -{' '}
+						{!edu.to ? 'Now' : <Moment format='DD/MM/YYYY'>{edu.to}</Moment>}
+					</p>
+					<p>
+						<strong>Degree: </strong>
+						{edu.degree}
+					</p>
+					<p>
+						<strong>Field Of Study: </strong>
+						{edu.fieldofstudy}
+					</p>
+					<p>
+						<strong>Description: </strong>
+						{edu.description}
+					</p>
+				</Fragment>
+			))}
 		</Fragment>
 	);
 };
