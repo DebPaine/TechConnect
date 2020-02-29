@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-const ProfileExp = ({ profile: { experience } }) => {
+const ProfileExperience = ({ profile: { experience } }) => {
 	return (
 		<Fragment>
 			{experience.map((exp) => (
@@ -26,8 +26,8 @@ const ProfileExp = ({ profile: { experience } }) => {
 	);
 };
 
-ProfileExp.propTypes = {
+ProfileExperience.propTypes = {
 	profile: PropTypes.object.isRequired
 };
 
-export default ProfileExp;
+export default ProfileExperience;

@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { getProfileById } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
 import ProfileBio from './ProfileBio';
-import ProfileExp from './ProfileExp';
-import ProfileEdu from './ProfileEdu';
+import ProfileExperience from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
 
 const Profile = ({
 	profile: { profile },
@@ -40,22 +40,22 @@ const Profile = ({
 					<div className='profile-grid my-1'>
 						<ProfileTop profile={profile} />
 						<ProfileBio profile={profile} />
-					</div>
-					<div className='profile-exp bg-white p-2'>
-						<h2 className='text-primary'>Experience</h2>
-						{profile.experience.length > 0 ? (
-							<ProfileExp profile={profile} />
-						) : (
-							<h4>No experience details added by user</h4>
-						)}
-					</div>
-					<div className='profile-edu bg-white p-2'>
-						<h2 className='text-primary'>Education</h2>
-						{profile.education.length > 0 ? (
-							<ProfileEdu profile={profile} />
-						) : (
-							<h4>No education details added by user</h4>
-						)}
+						<div className='profile-exp bg-white p-2'>
+							<h2 className='text-primary'>Experience</h2>
+							{profile.experience.length > 0 ? (
+								<ProfileExperience profile={profile} />
+							) : (
+								<h4>No experience details added by the user</h4>
+							)}
+						</div>
+						<div className='profile-edu bg-white p-2'>
+							<h2 className='text-primary'>Education</h2>
+							{profile.education.length > 0 ? (
+								<ProfileEducation profile={profile} />
+							) : (
+								<h4>No education details added by the user</h4>
+							)}
+						</div>
 					</div>
 				</Fragment>
 			)}

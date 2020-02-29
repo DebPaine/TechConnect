@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-const ProfileEdu = ({ profile: { education } }) => {
+const ProfileEducation = ({ profile: { education } }) => {
 	return (
 		<Fragment>
 			{education.map((edu) => (
@@ -30,6 +30,8 @@ const ProfileEdu = ({ profile: { education } }) => {
 	);
 };
 
-ProfileEdu.propTypes = {};
+ProfileEducation.propTypes = {
+	profile: PropTypes.object.isRequired
+};
 
-export default ProfileEdu;
+export default ProfileEducation;
