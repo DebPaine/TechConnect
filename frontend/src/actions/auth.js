@@ -9,7 +9,8 @@ import {
 	USER_LOADED,
 	AUTH_ERROR,
 	SIGNOUT,
-	CLEAR_PROFILE
+	CLEAR_PROFILE,
+	CLEAR_POSTS
 } from './types';
 
 // Load user
@@ -84,10 +85,7 @@ export const signin = (email, password) => async (dispatch) => {
 
 // Sign out
 export const signout = () => (dispatch) => {
-	dispatch({
-		type: CLEAR_PROFILE
-	});
-	dispatch({
-		type: SIGNOUT
-	});
+	dispatch({ type: CLEAR_PROFILE });
+	dispatch({ type: CLEAR_POSTS });
+	dispatch({ type: SIGNOUT });
 };

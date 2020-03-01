@@ -13,7 +13,8 @@ const Profile = ({
 	profile: { profile },
 	auth: { isAuthenticated, gotResponse, user },
 	getProfileById,
-	match: { params: { id } }
+	match: { params: { id } },
+	history
 }) => {
 	useEffect(
 		() => {
@@ -28,7 +29,7 @@ const Profile = ({
 				''
 			) : (
 				<Fragment>
-					<Link to='/profiles' className='btn btn-light'>
+					<Link className='btn btn-light' onClick={() => history.goBack()}>
 						Go back
 					</Link>
 					{isAuthenticated &&

@@ -13,6 +13,8 @@ import AddExperience from './Components/profile-forms/AddExperience';
 import AddEducation from './Components/profile-forms/AddEducation';
 import Profiles from './Components/profiles/Profiles';
 import Profile from './Components/profile/Profile';
+import Posts from './Components/posts/Posts';
+import Post from './Components/posts/Post';
 import PrivateRoute from './Components/routing/PrivateRoute';
 import { loadUser } from './actions/auth';
 import store from './store';
@@ -32,13 +34,13 @@ const App = () => {
 					<Navbar />
 					<Route exact path='/' component={Landing} />
 					<section className='authforms'>
+						<Alert />
 						<Switch>
 							<Route exact path='/register' component={Register} />
 							<Route exact path='/signin' component={Signin} />
 						</Switch>
 					</section>
 					<section className='container'>
-						<Alert />
 						<Switch>
 							<Route exact path='/profiles' component={Profiles} />
 							<Route exact path='/profile/user/:id' component={Profile} />
@@ -47,6 +49,8 @@ const App = () => {
 							<PrivateRoute exact path='/edit-profile' component={EditProfile} />
 							<PrivateRoute exact path='/add-experience' component={AddExperience} />
 							<PrivateRoute exact path='/add-education' component={AddEducation} />
+							<PrivateRoute exact path='/posts' component={Posts} />
+							<PrivateRoute exact path='/post/:id' component={Post} />
 						</Switch>
 					</section>
 				</Fragment>
