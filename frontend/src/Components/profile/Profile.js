@@ -7,6 +7,7 @@ import ProfileTop from './ProfileTop';
 import ProfileBio from './ProfileBio';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
+import ProfileGithub from './ProfileGithub';
 
 const Profile = ({
 	profile: { profile },
@@ -55,6 +56,9 @@ const Profile = ({
 							) : (
 								<h4>No education details added by the user</h4>
 							)}
+						</div>
+						<div className='profile-github'>
+							{profile.githubusername && <ProfileGithub profile={profile} />}
 						</div>
 					</div>
 				</Fragment>

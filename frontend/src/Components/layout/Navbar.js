@@ -9,17 +9,20 @@ const Navbar = ({ auth: { isAuthenticated }, signout }) => {
 		<ul>
 			<li>
 				<Link to='/profiles'>
-					<i className='fas fa-users' /> Developers
+					<i className='fas fa-users iconmargin' />
+					<span className='hide-sm'> Developers</span>
 				</Link>
 			</li>
 			<li>
 				<Link to='/dashboard'>
-					<i className='fas fa-user' /> Dashboard
+					<i className='fas fa-user iconmargin' />
+					<span className='hide-sm'> Dashboard</span>
 				</Link>
 			</li>
 			<li>
 				<Link to='/' onClick={signout}>
-					<i className='fas fa-sign-out-alt' /> Sign out
+					<i className='fas fa-sign-out-alt iconmargin' />
+					<span className='hide-sm'> Sign out</span>
 				</Link>
 			</li>
 		</ul>

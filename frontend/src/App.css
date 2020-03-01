@@ -14,7 +14,7 @@
 }
 
 body {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Roboto Mono', sans-serif;
 	font-size: 1rem;
 	line-height: 1.6;
 	background-color: #fff;
@@ -43,7 +43,14 @@ img {
 	margin-top: 6rem;
 	margin-bottom: 3rem;
 }
-
+.authforms {
+	max-width: 500px;
+	margin: auto;
+	overflow: hidden;
+	padding: 0 2rem;
+	margin-top: 6rem;
+	margin-bottom: 3rem;
+}
 /* Text Styles*/
 .x-large {
 	font-size: 4rem;
@@ -141,7 +148,7 @@ img {
 
 .badge {
 	font-size: 0.8rem;
-	padding: 0.1rem;
+	padding: 0.2rem;
 	text-align: center;
 	margin: 0.3rem;
 	background: var(--light-color);
@@ -485,10 +492,14 @@ button {
 }
 
 /* Mobile Styles */
-@media (max-width: 700px) {
+@media (max-width: 750px) {
 	.container {
 		margin-top: 8rem;
 		max-width: 400px;
+	}
+
+	.iconmargin {
+		margin: 0 1.5rem;
 	}
 
 	.hide-sm {
