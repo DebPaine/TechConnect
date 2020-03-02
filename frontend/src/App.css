@@ -40,17 +40,10 @@ img {
 	margin: auto;
 	overflow: hidden;
 	padding: 0 2rem;
-	margin-top: 5rem;
+	margin-top: 6rem;
 	margin-bottom: 3rem;
 }
-.authforms {
-	max-width: 500px;
-	margin: auto;
-	overflow: hidden;
-	padding: 0 2rem;
-	margin-top: 8rem;
-	margin-bottom: 3rem;
-}
+
 /* Text Styles*/
 .x-large {
 	font-size: 4rem;
@@ -496,10 +489,6 @@ button {
 	.container {
 		margin-top: 8rem;
 		max-width: 400px;
-	}
-	.authforms {
-		max-width: 400px;
-		margin-top: 11rem;
 	}
 
 	.iconmargin {

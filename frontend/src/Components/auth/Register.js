@@ -21,7 +21,7 @@ export const Register = ({ setAlert, register, isAuthenticated }) => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		if (password !== password2) {
-			setAlert('Password do not match', 'danger', 3000);
+			setAlert('Password do not match', 'danger');
 		} else {
 			register(name, email, password);
 		}

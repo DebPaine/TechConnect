@@ -1,6 +1,7 @@
 import axios from 'axios';
 // import { setAlert } from './alert';
-import { GET_POSTS, GET_POST, POST_ERROR, CLEAR_POSTS, LIKE_UNLIKE } from './types';
+import { GET_POSTS, GET_POST, POST_ERROR, CLEAR_POSTS, LIKE_UNLIKE, DELETE_POST } from './types';
+import { setAlert } from './alert';
 
 // Get all posts
 export const getPosts = () => async (dispatch) => {
@@ -13,7 +14,7 @@ export const getPosts = () => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: POST_ERROR,
-			payload: { msg: err.response.status, status: err.response.status }
+			payload: { msg: err.response.data, status: err.response.status }
 		});
 	}
 };
@@ -30,7 +31,7 @@ export const getPost = (postID) => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: POST_ERROR,
-			payload: { msg: err.response.status, status: err.response.status }
+			payload: { msg: err.response.data, status: err.response.status }
 		});
 	}
 };
@@ -43,12 +44,27 @@ export const likeUnlikePosts = (postID) => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: POST_ERROR,
-			payload: { msg: err.response.status, status: err.response.status }
+			payload: { msg: err.response.data, status: err.response.status }
 		});
 	}
 };
+
 // Add comments
 export const addComment = (postID) => async (dispatch) => {
 	try {
 	} catch (err) {}
+};
+
+// Delete post
+export const deletePost = (postID) => async (dispatch) => {
+	try {
+		await axios.delete(`/posts/${postID}`);
+		dispatch(setAlert('Post deleted', 'success'));
+		dispatch({ type: DELETE_POST, payload: postID });
+	} catch (err) {
+		dispatch({
+			type: POST_ERROR,
+			payload: { msg: err.response.data, status: err.response.status }
+		});
+	}
 };

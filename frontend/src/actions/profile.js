@@ -133,13 +133,13 @@ export const deleteExperience = (exp_id) => async (dispatch) => {
 			type: GET_PROFILE,
 			payload: res.data
 		});
-		dispatch(setAlert('Experience deleted', 'success', 3000));
+		dispatch(setAlert('Experience deleted', 'success'));
 	} catch (err) {
 		dispatch({
 			type: PROFILE_ERROR,
 			payload: { msg: err.response.data, status: err.response.status }
 		});
-		dispatch(setAlert(err.response.data, 'danger', 3000));
+		dispatch(setAlert(err.response.data, 'danger'));
 	}
 };
 
@@ -151,7 +151,7 @@ export const addEducation = (formData, history) => async (dispatch) => {
 			type: UPDATE_PROFILE,
 			payload: res.data
 		});
-		dispatch(setAlert('Education added', 'success', 3000));
+		dispatch(setAlert('Education added', 'success'));
 		history.push('/dashboard');
 	} catch (err) {
 		dispatch({
@@ -162,7 +162,7 @@ export const addEducation = (formData, history) => async (dispatch) => {
 		if (Array.isArray(errors) === true && errors.length > 0) {
 			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
 		} else {
-			dispatch(setAlert(errors, 'danger', 3000));
+			dispatch(setAlert(errors, 'danger'));
 		}
 	}
 };
@@ -175,7 +175,7 @@ export const deleteEducation = (edu_id) => async (dispatch) => {
 			type: GET_PROFILE,
 			payload: res.data
 		});
-		dispatch(setAlert('Education deleted', 'success', 3000));
+		dispatch(setAlert('Education deleted', 'success'));
 	} catch (err) {
 		dispatch({
 			type: PROFILE_ERROR,
@@ -192,7 +192,7 @@ export const deleteAccount = () => async (dispatch) => {
 			axios.delete('/profile');
 			dispatch({ type: CLEAR_PROFILE });
 			dispatch({ type: ACCOUNT_DELETED });
-			dispatch(setAlert('Account deleted successfully', 3000));
+			dispatch(setAlert('Account deleted successfully'));
 		} catch (err) {
 			dispatch({
 				type: PROFILE_ERROR,

@@ -19,3 +19,4 @@ export const GET_POST = 'GET_POST';
 export const POST_ERROR = 'POST_ERROR';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const LIKE_UNLIKE = 'LIKE_UNLIKE';
+export const DELETE_POST = 'DELETE_POST';

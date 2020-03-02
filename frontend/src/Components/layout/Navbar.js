@@ -36,7 +36,20 @@ const Navbar = ({ auth: { isAuthenticated }, signout }) => {
 		<ul>
 			<li>
 				<Link to='/profiles'>
-					<i className='fas fa-users' /> Developers
+					<i className='fas fa-users iconmargin' />
+					<span className='hide-sm'> Developers</span>
+				</Link>
+			</li>
+			<li>
+				<Link to='/signin'>
+					<i className='fas fa-sign-in-alt iconmargin' />
+					<span className='hide-sm'> Sign in</span>
+				</Link>
+			</li>
+			<li>
+				<Link to='/register'>
+					<i className='fas fa-user-plus iconmargin' />
+					<span className='hide-sm'> Register</span>
 				</Link>
 			</li>
 		</ul>
