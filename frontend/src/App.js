@@ -33,7 +33,7 @@ const App = () => {
 				<Fragment>
 					<Navbar />
 					<Route exact path='/' component={Landing} />
-					<section className='authforms'>
+					<section>
 						<Alert />
 						<Switch>
 							<Route exact path='/register' component={Register} />

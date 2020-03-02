@@ -1,4 +1,4 @@
-import { GET_POSTS, POST_ERROR, CLEAR_POSTS } from '../actions/types';
+import { GET_POSTS, GET_POST, POST_ERROR, CLEAR_POSTS, LIKE_UNLIKE } from '../actions/types';
 
 const initialState = {
 	post: null,
@@ -14,6 +14,20 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				posts: payload,
+				gotResponse: true
+			};
+		case GET_POST:
+			return {
+				...state,
+				post: payload,
+				gotResponse: true
+			};
+		case LIKE_UNLIKE:
+			return {
+				...state,
+				posts: state.posts.map(
+					(post) => (post._id === payload.postID ? { ...post, likes: payload.likes } : post)
+				),
 				gotResponse: true
 			};
 		case CLEAR_POSTS:

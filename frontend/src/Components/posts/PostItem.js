@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { likeUnlikePosts } from '../../actions/post';
 
-const PostItem = ({ post: { _id, user, text, name, avatar, comments, likes, date }, auth }) => {
+const PostItem = ({ post: { _id, user, text, name, avatar, likes, comments, date }, index, auth, likeUnlikePosts }) => {
 	return (
 		<Fragment>
 			<div className='post bg-white p-1 my-1'>
@@ -19,18 +20,39 @@ const PostItem = ({ post: { _id, user, text, name, avatar, comments, likes, date
 					<p className='post-date'>
 						Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
 					</p>
-					<button type='button' className='btn btn-light'>
-						<i className='fas fa-thumbs-up' /> {likes.length > 0 && <span>{likes.length}</span>}
-					</button>
-					<button type='button' className='btn btn-light'>
-						<i className='fas fa-thumbs-down' />
-					</button>
+					{likes.filter((like) => like.user === auth.user._id).length > 0 ? (
+						<button
+							type='button'
+							className='btn like'
+							style={{ color: 'blue' }}
+							onClick={() => {
+								const likeButton = document.querySelectorAll('.like')[index];
+								likeButton.style.color = '#333';
+								likeUnlikePosts(_id);
+							}}
+						>
+							<i className='fas fa-thumbs-up' /> {likes.length > 0 && <span>{likes.length}</span>}
+						</button>
+					) : (
+						<button
+							type='button'
+							className='btn btn-light like'
+							onClick={() => {
+								const likeButton = document.querySelectorAll('.like')[index];
+								likeButton.style.color = 'blue';
+								likeUnlikePosts(_id);
+							}}
+						>
+							<i className='fas fa-thumbs-up' /> {likes.length > 0 && <span>{likes.length}</span>}
+						</button>
+					)}
+
 					<Link to={`/post/${_id}`} className='btn btn-primary'>
 						Discussion {comments.length > 0 && <span className='comment-count'>{comments.length}</span>}
 					</Link>
 					{user === auth.user._id && (
 						<button type='button' className='btn btn-danger'>
-							<i className='fas fa-times' />
+							<i className='fas fa-times' /> <span>Delete post</span>
 						</button>
 					)}
 				</div>
@@ -44,8 +66,9 @@ const mapStateToProps = (state) => ({
 });
 
 PostItem.propTypes = {
-	auth: PropTypes.array.isRequired,
-	post: PropTypes.object.isRequired
+	auth: PropTypes.object.isRequired,
+	post: PropTypes.object.isRequired,
+	likeUnlikePosts: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(PostItem);
+export default connect(mapStateToProps, { likeUnlikePosts })(PostItem);

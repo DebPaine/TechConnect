@@ -94,12 +94,12 @@ router.put('/:postid/like', authMiddleware, async (req, res) => {
 			post.likes.splice(userIndex, 1);
 		} else {
 			// If post not liked by the user, then like it
-			post.likes.unshift({
+			post.likes.push({
 				user: req.userID
 			});
 		}
 		await post.save();
-		res.json(post);
+		res.json(post.likes);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).json('Server error');

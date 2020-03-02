@@ -14,14 +14,14 @@ const Posts = ({ post: { posts }, getPosts }) => {
 
 	return (
 		<Fragment>
-			<h1 class='large text-primary'>Posts</h1>
-			<p class='lead'>
-				<i class='fas fa-user' /> Welcome to the community!
+			<h1 className='large text-primary'>Posts</h1>
+			<p className='lead'>
+				<i className='fas fa-user' /> Welcome to the community!
 			</p>
 			{posts.length < 1 ? (
-				<h4>Posts not available</h4>
+				<h4>Loading ...</h4>
 			) : (
-				posts.map((post) => <PostItem key={post._id} post={post} />)
+				posts.map((post, index) => <PostItem key={post._id} post={post} index={index} />)
 			)}
 		</Fragment>
 	);

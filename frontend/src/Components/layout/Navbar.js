@@ -9,7 +9,7 @@ const Navbar = ({ auth: { isAuthenticated }, signout }) => {
 		<ul>
 			<li>
 				<Link to='/posts'>
-					<i class='fas fa-stream iconmargin' />
+					<i className='fas fa-stream iconmargin' />
 					<span className='hide-sm'> Posts</span>
 				</Link>
 				<Link to='/profiles'>
