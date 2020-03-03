@@ -1,4 +1,14 @@
-import { GET_POSTS, GET_POST, POST_ERROR, CLEAR_POSTS, LIKE_UNLIKE, DELETE_POST } from '../actions/types';
+import {
+	GET_POSTS,
+	GET_POST,
+	POST_ERROR,
+	CLEAR_POSTS,
+	LIKE_UNLIKE,
+	ADD_POST,
+	ADD_COMMENT,
+	DELETE_COMMENT,
+	DELETE_POST
+} from '../actions/types';
 
 const initialState = {
 	post: null,
@@ -22,6 +32,18 @@ export default function (state = initialState, action) {
 				post: payload,
 				gotResponse: true
 			};
+		case ADD_COMMENT:
+			return {
+				...state,
+				post: { ...state.post, comments: payload },
+				gotResponse: true
+			};
+		case ADD_POST:
+			return {
+				...state,
+				posts: [ payload, ...state.posts ],
+				gotResponse: true
+			};
 		case LIKE_UNLIKE:
 			return {
 				...state,
@@ -35,6 +57,12 @@ export default function (state = initialState, action) {
 				...state,
 				posts: [],
 				post: null,
+				gotResponse: true
+			};
+		case DELETE_COMMENT:
+			return {
+				...state,
+				post: state.post.comments.filter((comment) => comment._id !== payload),
 				gotResponse: true
 			};
 		case DELETE_POST:

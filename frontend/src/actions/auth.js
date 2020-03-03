@@ -22,7 +22,7 @@ export const loadUser = () => async (dispatch) => {
 		const res = await axios.get('/auth');
 		dispatch({
 			type: USER_LOADED,
-			payload: res.data // data = user
+			payload: res.data
 		});
 	} catch (err) {
 		dispatch({

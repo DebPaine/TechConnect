@@ -10,7 +10,8 @@ const PostItem = ({
 	index,
 	auth,
 	likeUnlikePosts,
-	deletePost
+	deletePost,
+	showActions
 }) => {
 	return (
 		<Fragment>
@@ -24,48 +25,56 @@ const PostItem = ({
 				<div>
 					<p className='my-1'>{text}</p>
 					<p className='post-date'>
-						Posted on <Moment format='HH:mm DD/MM/YYYY,
-						delete'>{date}</Moment>
+						Posted on <Moment format='HH:mm DD/MM/YYYY'>{date}</Moment>
 					</p>
-					{likes.filter((like) => like.user === auth.user._id).length > 0 ? (
-						<button
-							type='button'
-							className='btn like'
-							style={{ color: '#17a2b8' }}
-							onClick={() => {
-								const likeButton = document.querySelectorAll('.like')[index];
-								likeButton.style.color = '#333';
-								likeUnlikePosts(_id);
-							}}
-						>
-							<i className='fas fa-thumbs-up' /> {likes.length > 0 && <span>{likes.length}</span>}
-						</button>
-					) : (
-						<button
-							type='button'
-							className='btn btn-light like'
-							onClick={() => {
-								const likeButton = document.querySelectorAll('.like')[index];
-								likeButton.style.color = '#17a2b8';
-								likeUnlikePosts(_id);
-							}}
-						>
-							<i className='fas fa-thumbs-up' /> {likes.length > 0 && <span>{likes.length}</span>}
-						</button>
-					)}
+					{showActions && (
+						<div>
+							{likes.filter((like) => like.user === auth.user._id).length > 0 ? (
+								<button
+									type='button'
+									className='btn like'
+									style={{ color: '#17a2b8' }}
+									onClick={() => {
+										const likeButton = document.querySelectorAll('.like')[index];
+										likeButton.style.color = '#333';
+										likeUnlikePosts(_id);
+									}}
+								>
+									<i className='fas fa-thumbs-up' /> {likes.length > 0 && <span>{likes.length}</span>}
+								</button>
+							) : (
+								<button
+									type='button'
+									className='btn btn-light like'
+									onClick={() => {
+										const likeButton = document.querySelectorAll('.like')[index];
+										likeButton.style.color = '#17a2b8';
+										likeUnlikePosts(_id);
+									}}
+								>
+									<i className='fas fa-thumbs-up' /> {likes.length > 0 && <span>{likes.length}</span>}
+								</button>
+							)}
+							<Link to={`/posts/${_id}`} className='btn btn-primary'>
+								Discussion{' '}
+								{comments.length > 0 && <span className='comment-count'>{comments.length}</span>}
+							</Link>
 
-					<Link to={`/post/${_id}`} className='btn btn-primary'>
-						Discussion {comments.length > 0 && <span className='comment-count'>{comments.length}</span>}
-					</Link>
-					{user === auth.user._id && (
-						<button type='button' className='btn btn-danger' onClick={() => deletePost(_id)}>
-							<i className='fas fa-times' /> <span>Delete post</span>
-						</button>
+							{user === auth.user._id && (
+								<button type='button' className='btn btn-danger' onClick={() => deletePost(_id)}>
+									<i className='fas fa-times' /> <span>Delete post</span>
+								</button>
+							)}
+						</div>
 					)}
 				</div>
 			</div>
 		</Fragment>
 	);
+};
+
+PostItem.defaultProps = {
+	showActions: true
 };
 
 const mapStateToProps = (state) => ({

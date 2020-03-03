@@ -29,7 +29,7 @@ const Profile = ({
 				''
 			) : (
 				<Fragment>
-					<Link className='btn btn-light' onClick={() => history.goBack()}>
+					<Link to='' className='btn btn-light' onClick={() => history.goBack()}>
 						Go back
 					</Link>
 					{isAuthenticated &&

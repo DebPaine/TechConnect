@@ -113,7 +113,7 @@ router.post(
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			return res.status(400).json(errors);
+			return res.status(400).json({ errors: errors.array() });
 		}
 		try {
 			const user = await User.findById(req.userID).select('-password');
@@ -129,7 +129,7 @@ router.post(
 			post.comments.unshift(newComment);
 
 			await post.save();
-			res.json(post);
+			res.json(post.comments);
 		} catch (err) {
 			console.error(err.message);
 			res.status(500).json('Server error');
@@ -156,7 +156,7 @@ router.delete('/:postid/comment/:commentid', authMiddleware, async (req, res) =>
 		post.comments.splice(deleteComment, 1);
 
 		await post.save();
-		res.json(post);
+		res.json(post.comments);
 	} catch (err) {
 		console.log(err.message);
 		if (err.kind === 'ObjectId') {

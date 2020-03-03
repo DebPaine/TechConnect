@@ -130,7 +130,7 @@ img {
 	display: inline-block;
 	background: var(--light-color);
 	color: #333;
-	padding: 0.4rem 1.3rem;
+	padding: 0.1rem 1rem;
 	font-size: 1rem;
 	border: none;
 	cursor: pointer;
@@ -458,7 +458,7 @@ button {
 .post {
 	display: grid;
 	grid-template-columns: 1fr 4fr;
-	grid-gap: 2rem;
+	grid-gap: 5rem;
 	align-items: center;
 }
 
@@ -486,6 +486,71 @@ button {
 
 /* Mobile Styles */
 @media (max-width: 825px) {
+	.btn {
+		display: inline-block;
+		background: var(--light-color);
+		color: #333;
+		padding: 0.1rem 0.5rem;
+		font-size: 0.8rem;
+		border: none;
+		cursor: pointer;
+		margin-right: 1.2rem;
+		transition: opacity 0.2s ease-in;
+		outline: none;
+	}
+	.btn-primary,
+	.bg-primary,
+	.badge-primary,
+	.alert-primary {
+		background: var(--primary-color);
+		color: #fff;
+	}
+
+	.btn-light,
+	.bg-light,
+	.badge-light,
+	.alert-light {
+		background: var(--light-color);
+		color: #333;
+	}
+
+	.btn-dark,
+	.bg-dark,
+	.badge-dark,
+	.alert-dark {
+		background: var(--dark-color);
+		color: #fff;
+	}
+
+	.btn-danger,
+	.bg-danger,
+	.badge-danger,
+	.alert-danger {
+		background: var(--danger-color);
+		color: #fff;
+	}
+
+	.btn-success,
+	.bg-success,
+	.badge-success,
+	.alert-success {
+		background: var(--success-color);
+		color: #fff;
+	}
+
+	.btn-white,
+	.bg-white,
+	.badge-white,
+	.alert-white {
+		background: #fff;
+		color: #333;
+		border: #ccc solid 1px;
+	}
+
+	.btn:hover {
+		opacity: 0.8;
+	}
+
 	.container {
 		margin-top: 8rem;
 		max-width: 400px;
@@ -566,6 +631,11 @@ button {
 	.post {
 		grid-template-columns: 1fr;
 	}
+
+	.comment {
+		grid-template-rows: 1fr;
+	}
+
 	.post a,
 	.post button {
 		padding: 0.3rem 0.4rem;

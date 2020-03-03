@@ -19,4 +19,7 @@ export const GET_POST = 'GET_POST';
 export const POST_ERROR = 'POST_ERROR';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const LIKE_UNLIKE = 'LIKE_UNLIKE';
+export const ADD_POST = 'ADD_POST';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const DELETE_POST = 'DELETE_POST';
