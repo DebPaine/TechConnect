@@ -21,40 +21,34 @@ const Posts = ({ auth: { isAuthenticated }, post: { posts }, getPosts, addPost }
 
 	return (
 		<Fragment>
-			{posts.length > 0 ? (
-				<Fragment>
-					<h1 className='large text-primary'>Posts</h1>
-					<p className='lead'>
-						<i className='fas fa-user' /> Welcome to the community!
-					</p>
-					<div className='post-form'>
-						<div className='bg-primary p'>
-							<h3>Say Something...</h3>
-						</div>
-						<form
-							className='form my-1'
-							onSubmit={(e) => {
-								e.preventDefault();
-								addPost(postData);
-								setPostData('');
-							}}
-						>
-							<textarea
-								name='text'
-								value={postData}
-								cols='30'
-								rows='5'
-								placeholder='Create a post'
-								onChange={(e) => setPostData(e.target.value)}
-							/>
-							<input type='submit' className='btn btn-dark my-1' />
-						</form>
-					</div>
-					{posts.map((post, index) => <PostItem key={post._id} post={post} index={index} />)}
-				</Fragment>
-			) : (
-				<h4>Loading ...</h4>
-			)}
+			<h1 className='large text-primary'>Posts</h1>
+			<p className='lead'>
+				<i className='fas fa-user' /> Welcome to the community!
+			</p>
+			<div className='post-form'>
+				<div className='bg-primary p'>
+					<h3>Say Something...</h3>
+				</div>
+				<form
+					className='form my-1'
+					onSubmit={(e) => {
+						e.preventDefault();
+						addPost(postData);
+						setPostData('');
+					}}
+				>
+					<textarea
+						name='text'
+						value={postData}
+						cols='30'
+						rows='5'
+						placeholder='Create a post'
+						onChange={(e) => setPostData(e.target.value)}
+					/>
+					<input type='submit' className='btn btn-dark my-1' />
+				</form>
+			</div>
+			{posts.map((post, index) => <PostItem key={post._id} post={post} index={index} />)}
 		</Fragment>
 	);
 };
