@@ -6,7 +6,7 @@ const Post = require('../models/Post');
 const authMiddleware = require('../middleware/auth');
 
 // Add new post
-router.post('/', [ authMiddleware, [ check('text', "Text field can't be empty").notEmpty() ] ], async (req, res) => {
+router.post('/', [ authMiddleware, [ check('text', "Post can't be empty").notEmpty() ] ], async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json(errors);
@@ -156,7 +156,7 @@ router.delete('/:postid/comment/:commentid', authMiddleware, async (req, res) =>
 		post.comments.splice(deleteComment, 1);
 
 		await post.save();
-		res.json(post.comments);
+		res.json('Post deleted');
 	} catch (err) {
 		console.log(err.message);
 		if (err.kind === 'ObjectId') {

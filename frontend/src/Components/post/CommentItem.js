@@ -20,7 +20,7 @@ const CommentItem = ({ comment: { _id, user, name, text, avatar, date }, postID,
 			</p>
 			{user === auth.user._id && (
 				<button type='button' className='btn btn-danger' onClick={() => deleteComment(postID, _id)}>
-					<i className='fas fa-times' /> <span>Delete comment</span>
+					<i className='fas fa-times' />
 				</button>
 			)}
 		</div>

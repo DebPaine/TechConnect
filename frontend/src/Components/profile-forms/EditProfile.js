@@ -37,7 +37,7 @@ const EditProfile = ({ profile: { profile, gotResponse }, createProfile, getCurr
 			}
 		},
 		// eslint-disable-next-line
-		[ gotResponse, getCurrentProfile, profile ]
+		[]
 	);
 
 	const {

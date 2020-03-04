@@ -7,7 +7,7 @@ import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
 import { getPost } from '../../actions/post';
 
-const Post = ({ match: { params: { id } }, post, getPost }) => {
+const Post = ({ match: { params: { id } }, post: { post }, getPost }) => {
 	useEffect(
 		() => {
 			getPost(id);
@@ -15,34 +15,28 @@ const Post = ({ match: { params: { id } }, post, getPost }) => {
 		[ getPost, id ]
 	);
 
-	return (
-		post !== null && (
-			<Fragment>
-				<Link to='/posts' className='btn btn-light'>
-					Back to posts
-				</Link>
-				<PostItem post={post} showActions={false} />
-				<CommentForm postID={post._id} />
-				<div className='comments'>
-					{post.comments.length > 0 ? (
-						post.comments.map((comment) => (
-							<CommentItem key={comment._id} postID={post._id} comment={comment} />
-						))
-					) : (
-						<h4>No comments</h4>
-					)}
-				</div>
-			</Fragment>
-		)
+	return post === null ? (
+		<h4>Loading ...</h4>
+	) : (
+		<Fragment>
+			<Link to='/posts' className='btn btn-light'>
+				Back to posts
+			</Link>
+			<PostItem post={post} showActions={false} />
+			<CommentForm postID={post._id} />
+			<div className='comments'>
+				{post.comments.map((comment) => <CommentItem key={comment._id} postID={post._id} comment={comment} />)}
+			</div>
+		</Fragment>
 	);
 };
 
 const mapStateToProps = (state) => ({
-	post: state.post.post
+	post: state.post
 });
 
 Post.propTypes = {
-	post: PropTypes.object.isRequired,
+	post: PropTypes.object,
 	getPost: PropTypes.func.isRequired
 };
 

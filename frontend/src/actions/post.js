@@ -53,7 +53,7 @@ export const likeUnlikePosts = (postID) => async (dispatch) => {
 // Add comment
 export const addComment = (postID, text) => async (dispatch) => {
 	try {
-		const res = axios.post(`/posts/${postID}/comment`, { text });
+		const res = await axios.post(`/posts/${postID}/comment`, { text });
 		dispatch({ type: ADD_COMMENT, payload: res.data });
 		dispatch(setAlert('New comment added', 'success'));
 	} catch (err) {
@@ -81,7 +81,6 @@ export const deleteComment = (postID, commentID) => async (dispatch) => {
 			type: POST_ERROR,
 			payload: { msg: err.response.data, status: err.response.status }
 		});
-		dispatch(setAlert('Error deleting comment', 'danger'));
 	}
 };
 
@@ -109,8 +108,8 @@ export const addPost = (text) => async (dispatch) => {
 export const deletePost = (postID) => async (dispatch) => {
 	try {
 		await axios.delete(`/posts/${postID}`);
-		dispatch(setAlert('Post deleted', 'success'));
 		dispatch({ type: DELETE_POST, payload: postID });
+		dispatch(setAlert('Post deleted', 'success'));
 	} catch (err) {
 		dispatch({
 			type: POST_ERROR,

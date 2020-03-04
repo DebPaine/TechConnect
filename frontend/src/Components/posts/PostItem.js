@@ -62,7 +62,7 @@ const PostItem = ({
 
 							{user === auth.user._id && (
 								<button type='button' className='btn btn-danger' onClick={() => deletePost(_id)}>
-									<i className='fas fa-times' /> <span>Delete post</span>
+									<i className='fas fa-times' />
 								</button>
 							)}
 						</div>
