@@ -1,8 +1,11 @@
 {
-	"name": "developer-hub",
+	"name": "TechConnect",
 	"version": "1.0.0",
 	"description": "Social network for developers",
 	"main": "index.js",
+	"engines": {
+		"node": "13.8.0"
+	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
 		"config": "^3.2.5",
@@ -22,17 +25,17 @@
 		"server": "nodemon server",
 		"frontend": "npm start --prefix frontend",
 		"dev": "concurrently \"npm run server\" \"npm run frontend\"",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/DebPaine/developer-hub.git"
+		"url": "git+https://github.com/DebPaine/TechConnect.git"
 	},
 	"keywords": [],
 	"author": "Debmalya Paine",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/DebPaine/developer-hub/issues"
+		"url": "https://github.com/DebPaine/TechConnect/issues"
 	},
-	"homepage": "https://github.com/DebPaine/developer-hub#readme"
+	"homepage": "https://github.com/DebPaine/TechConnect#readme"
 }
