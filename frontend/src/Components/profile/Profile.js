@@ -25,9 +25,7 @@ const Profile = ({
 
 	return (
 		<Fragment>
-			{!profile ? (
-				''
-			) : (
+			{profile && (
 				<Fragment>
 					<Link to='' className='btn btn-light' onClick={() => history.goBack()}>
 						Go back
