@@ -1,2 +1,2 @@
-# developer-hub
+# TechConnect
 Social network for developers
