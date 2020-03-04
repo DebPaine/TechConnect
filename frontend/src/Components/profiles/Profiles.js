@@ -14,17 +14,21 @@ const Profiles = ({ profiles, getAllProfiles }) => {
 
 	return (
 		<Fragment>
-			<h1 className='large text-primary'>Developers</h1>
-			<p className='lead'>
-				<i className='fab fa-connectdevelop' /> Browse and connect with developers
-			</p>
-			<Fragment>
-				{profiles.length > 0 ? (
-					profiles.map((profile) => <ProfileItem key={profile._id} profile={profile} />)
-				) : (
-					<h4>Loading ...</h4>
-				)}
-			</Fragment>
+			{profiles.length > 0 && (
+				<Fragment>
+					<h1 className='large text-primary'>Developers</h1>
+					<p className='lead'>
+						<i className='fab fa-connectdevelop' /> Browse and connect with developers
+					</p>
+					<Fragment>
+						{profiles.length > 0 ? (
+							profiles.map((profile) => <ProfileItem key={profile._id} profile={profile} />)
+						) : (
+							<h4>Loading ...</h4>
+						)}
+					</Fragment>
+				</Fragment>
+			)}
 		</Fragment>
 	);
 };
