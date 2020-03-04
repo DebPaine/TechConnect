@@ -1,10 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPosts, addPost } from '../../actions/post';
 import PostItem from './PostItem';
 
-const Posts = ({ post: { posts }, getPosts, addPost }) => {
+const Posts = ({ auth: { isAuthenticated }, post: { posts }, getPosts, addPost }) => {
 	const [ postData, setPostData ] = useState('');
 
 	useEffect(
@@ -13,6 +14,10 @@ const Posts = ({ post: { posts }, getPosts, addPost }) => {
 		},
 		[ getPosts ]
 	);
+
+	if (!isAuthenticated) {
+		return <Redirect to='/signin' />;
+	}
 
 	return (
 		<Fragment>
@@ -55,10 +60,12 @@ const Posts = ({ post: { posts }, getPosts, addPost }) => {
 };
 
 const mapStateToProps = (state) => ({
+	auth: state.auth,
 	post: state.post
 });
 
 Posts.propTypes = {
+	auth: PropTypes.object.isRequired,
 	post: PropTypes.object.isRequired,
 	getPosts: PropTypes.func.isRequired,
 	addPost: PropTypes.func.isRequired
