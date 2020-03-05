@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const authMiddleware = require('../middleware/auth');
 const User = require('../models/User');
+const config = require('config');
 
 // To see if user exists or not
 router.get('/', authMiddleware, async (req, res) => {
@@ -41,7 +42,7 @@ router.post(
 				return res.status(401).json({ error: 'Invalid credentials' });
 			}
 
-			jwt.sign({ userID: user.id }, `${process.env.jwtSecret}`, { expiresIn: 3600 }, (err, token) => {
+			jwt.sign({ userID: user.id }, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
 				if (err) throw err;
 				res.json({ token });
 			});

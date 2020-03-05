@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const config = require('config');
 //gets JSON from default.json, folder name should also be config along with default.json
 
 module.exports = async () => {
 	try {
-		await mongoose.connect(`${process.env.mongoURI}`, {
+		await mongoose.connect(config.get('mongoURI'), {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			useCreateIndex: true,
