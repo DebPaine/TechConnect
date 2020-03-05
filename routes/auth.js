@@ -41,7 +41,7 @@ router.post(
 				return res.status(401).json({ error: 'Invalid credentials' });
 			}
 
-			jwt.sign({ userID: user.id }, process.env.jwtsecret, { expiresIn: 3600 }, (err, token) => {
+			jwt.sign({ userID: user.id }, process.env.jwtSecret, { expiresIn: 3600 }, (err, token) => {
 				if (err) throw err;
 				res.json({ token });
 			});

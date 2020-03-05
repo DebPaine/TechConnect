@@ -45,7 +45,7 @@ router.post(
 			await user.save();
 
 			const payload = { userID: user.id };
-			jwt.sign(payload, process.env.jwtsecret, { expiresIn: 3600 }, (err, token) => {
+			jwt.sign(payload, process.env.jwtSecret, { expiresIn: 3600 }, (err, token) => {
 				if (err) throw err;
 				res.json({ token });
 			});
