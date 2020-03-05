@@ -277,7 +277,7 @@ router.get('/github/:username', async (req, res) => {
 			method: 'GET',
 			headers: {
 				'user-agent': 'node.js',
-				Authorization: `token ${config.get('OAUTH-TOKEN')}`
+				Authorization: `token ${process.env.OAUTH-TOKEN}`
 			}
 		};
 
