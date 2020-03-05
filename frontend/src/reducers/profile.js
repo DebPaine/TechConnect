@@ -36,7 +36,6 @@ export default function (state = initialState, action) {
 				...state,
 				gotResponse: true,
 				error: payload,
-				profile: null,
 				repos: []
 			};
 		case CLEAR_PROFILE:
