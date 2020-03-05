@@ -1,0 +1,5 @@
+{
+	"mongoURI": "mongodb+srv://DebPaine:Ukp_272340@developerhub-5bhxp.mongodb.net/test?retryWrites=true&w=majority",
+	"jwtSecret": "secrettokenofmine",
+	"OAUTH-TOKEN": "bdacf1a345397c1047fa3d8173f4be61f17e6a31"
+}
